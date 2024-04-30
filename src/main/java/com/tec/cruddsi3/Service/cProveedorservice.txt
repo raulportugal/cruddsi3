@@ -1,0 +1,38 @@
+package com.tec.cruddsi3.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.tec.cruddsi3.interfaceService.iProductoService;
+import com.tec.cruddsi3.interfaces.iProducto;
+import com.tec.cruddsi3.model.cProducto;
+@Service
+public class cProveedorservice implements iProductoService {
+    
+    @Autowired
+    private iProducto data;
+    
+    @Override
+    public List<cProducto> find(){
+        return (List<cProveedor>) data.findAll();
+    }
+    @Override
+    public Optional<cProveedor> findById(int id){
+        return (Optional<cProveedor>) data.findById(id);
+    }
+    @Override
+    public int save(cProveedor obj){
+        int res=0;
+        cProveedor oProveedor = data.save(obj);
+        if (oProveedor.equals(null)) {
+            res=1;
+        }
+        return res;
+    }
+    @Override
+    public void delete(int id){
+        data.deleteById(id);
+    }
+}
